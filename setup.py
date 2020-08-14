@@ -1,19 +1,25 @@
-from setuptools import setup, find_packages
+from setuptools import setup
+from setuptools import find_namespace_packages
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='',
+    name='azure-sql-project',
     author='Alex Reed',
     author_email='coding.sigma@gmail.com',
     version='0.0.1',
-    description='',
+    description='A Microsoft Azure project used to send data to an Azure SQL Database.',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='',
-    install_requires=[],
-    packages=find_packages(include=[]),
+    url='https://github.com/areed1192/azure-sql-data-project',
+    install_requires=[
+        'azure-mgmt-sql',
+        'azure.identity',
+        'requests',
+        'azure.mgmt.resource'
+    ],
+    packages=find_namespace_packages(include=['sigma_data']),
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Financial and Insurance Industry',
