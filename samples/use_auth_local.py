@@ -1,3 +1,4 @@
+from pprint import pprint
 from configparser import ConfigParser
 
 from azure.mgmt.sql import SqlManagementClient
@@ -36,6 +37,38 @@ sql_management_client = SqlManagementClient(
     subscription_id=subscription_id
 )
 
-# Grab the Server.
-server = next(sql_management_client.servers.list())
+# Grab a server using the Resource Group Name.
+server = sql_management_client.servers.get(
+    resource_group_name='resource_group_test',
+    server_name='trading-robot'
+)
 print(server)
+
+# Grab the master database from the `trading-robot` server.
+database = sql_management_client.databases.get(
+    resource_group_name='resource_group_test',
+    server_name='trading-robot',
+    database_name='master'
+)
+print(database)
+print(database.name)
+print(database.id)
+print(database.status)
+
+# Create a new database called `financial-news` on the `trading-robot` server.
+operation_result = sql_management_client.databases.create_or_update(
+    resource_group_name='resource_group_test',
+    server_name='trading-robot',
+    database_name='financial-news',
+    parameters={
+        'location': 'eastus'
+    }
+)
+print(operation_result.result())
+
+# Delete a database from my server.
+operation_result = sql_management_client.databases.delete(
+    resource_group_name='resource_group_test',
+    server_name='trading-robot',
+    database_name='financial-news'
+)
