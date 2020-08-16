@@ -1,8 +1,9 @@
 from setuptools import setup
 from setuptools import find_namespace_packages
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+# Open the README File.
+with open(file="README.md", mode="r") as readme_file:
+    long_description = readme_file.read()
 
 setup(
     name='azure-sql-project',
@@ -14,12 +15,15 @@ setup(
     long_description_content_type="text/markdown",
     url='https://github.com/areed1192/azure-sql-data-project',
     install_requires=[
+        'pyodbc',
         'azure-mgmt-sql',
         'azure.identity',
         'requests',
         'azure.mgmt.resource'
     ],
-    packages=find_namespace_packages(include=['sigma_data']),
+    packages=find_namespace_packages(
+        include=['azure_data_pipeline']
+    ),
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Financial and Insurance Industry',

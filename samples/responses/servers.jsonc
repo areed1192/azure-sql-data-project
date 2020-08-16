@@ -1,0 +1,18 @@
+{
+  "additional_properties": {},
+  "id": "/subscriptions/<SUB_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.Sql/servers/trading-robot",
+  "name": "trading-robot",
+  "type": "Microsoft.Sql/servers",
+  "location": "eastus",
+  "tags": {},
+  "identity": null,
+  "kind": "v12.0",
+  "administrator_login": null,
+  "administrator_login_password": null,
+  "version": "12.0",
+  "state": "Ready",
+  "fully_qualified_domain_name": "trading-robot.database.windows.net",
+  "private_endpoint_connections": [],
+  "minimal_tls_version": null,
+  "public_network_access": "Enabled"
+}
