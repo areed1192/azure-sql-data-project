@@ -1,0 +1,4 @@
+pyodbc==4.0.30
+azure_storage==0.37.0
+azure-mgmt-sql
+azure.mgmt.resource
