@@ -7,12 +7,15 @@ from typing import List
 from typing import Dict
 from typing import Union
 
+from finnews.client import News
+
 from azure.mgmt.sql import SqlManagementClient
 from azure.mgmt.resource import SubscriptionClient
 from azure.common.credentials import ServicePrincipalCredentials
 from azure.mgmt.sql.models import Database as AzureDatabase
 from azure.mgmt.sql.models import Server as AzureServer
 
+from azure_data_pipeline.query import QueryBuilder
 
 class AzureSQLClient():
 
@@ -60,6 +63,10 @@ class AzureSQLClient():
         # Define properties related to connection.
         self.connection_object: pyodbc.Connection = None
         self.cursor_object: pyodbc.Cursor = None
+
+        # Create the News Client object.
+        self._news_client = News()
+        self._query_client: QueryBuilder = None
 
     def __repr__(self):
         """String representation of our `AzureSQLClient` instance."""
@@ -125,6 +132,24 @@ class AzureSQLClient():
         self.authenticated = True
 
     @property
+    def query_client(self) -> QueryBuilder:
+        """Returns the `QueryBuilder` client object.
+
+        Returns:
+        ----
+        QueryBuilder: The query builder client.
+        """
+
+        # Initialize the Client.
+        self._query_client = QueryBuilder(
+            azure_connection=self.connection_object,
+            azure_cursor=self.cursor_object,
+            azure_client=self
+        )
+
+        return self._query_client
+
+    @property
     def credentials(self) -> ServicePrincipalCredentials:
         """Returns the credential object.
 
@@ -135,6 +160,17 @@ class AzureSQLClient():
         """
 
         return self._credentials
+
+    @property
+    def news_client(self) -> News:
+        """Returns the `NewsClient` object.
+
+        Returns:
+        ----
+        News: A `NewsClient` object.
+        """
+
+        return self._news_client
 
     @property
     def sql_management_client(self) -> SqlManagementClient:
@@ -258,29 +294,29 @@ class AzureSQLClient():
         """
 
         # Grab the inputs if they don't exist.
-        if self._resource_group:
-            resource_group = self.resource_group_name
-        else:
+        if resource_group:
             resource_group = resource_group
+        elif self._resource_group:
+            resource_group = self.resource_group_name
 
-        if self._server_name:
-            server_name = self.server_name
-        else:
+        if server_name:
             server_name = server_name
+        elif self._server_name:
+            server_name = self.server_name
 
-        if self._database_name:
-            database_name = self.database_name
-        else:
+        if database_name:
             database_name = database_name
+        elif self._database_name:
+            database_name = self.database_name
 
         # Grab the database.
-        database = self.sql_management_client.databases.get(
+        databases = self.sql_management_client.databases.get(
             resource_group_name=resource_group,
             server_name=server_name,
             database_name=database_name
         )
 
-        return database
+        return databases
 
     def connect_to_database(self, server: str, database: str, driver: str = None) -> pyodbc.Connection:
         """Creates a connection to the SQL Database and opens the Cursor.
@@ -309,10 +345,13 @@ class AzureSQLClient():
         else:
             driver = '{ODBC Driver 17 for SQL Server}'
 
+        self._server_name = server
+        self._database_name = database
+
         # Create the connection String.
         connection_string = textwrap.dedent('''
             Driver={driver};
-            Server={server};
+            Server=tcp:{server};
             Database={database};
             Uid={username};
             Pwd={password};
@@ -340,12 +379,3 @@ class AzureSQLClient():
         """Creates the `Cursor` Object from the Database Connection. """
 
         self.cursor_object = self.connection_object.cursor()
-
-
-# with pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password) as conn:
-#     with conn.cursor() as cursor:
-#         cursor.execute("SELECT TOP 20 pc.Name as CategoryName, p.name as ProductName FROM [SalesLT].[ProductCategory] pc JOIN [SalesLT].[Product] p ON pc.productcategoryid = p.productcategoryid")
-#         row = cursor.fetchone()
-#         while row:
-#             print (str(row[0]) + " " + str(row[1]))
-#             row = cursor.fetchone()

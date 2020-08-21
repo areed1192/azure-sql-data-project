@@ -1,0 +1,9 @@
+{
+  "message": "Define the Insert Query.",
+  "query": "INSERT INTO [dbo].[{table_name}]\n({column_names})\nVALUES\n{record_tuples}",
+  "placeholders": {
+    "table_name": "The name of the table.",
+    "column_name": "The name of the columns that exist in the table.",
+    "record_tuples": "The records to be inserted."
+  }
+}

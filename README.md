@@ -82,18 +82,24 @@ config = ConfigParser()
 # Read the file.
 config.read('config/config.ini')
 
-# Grab the Azure Credentials needed.
+# Grab the Azure Management Credentials.
 subscription_id = config.get('azure_credentials', 'azure_subscription_id')
 tenant_id = config.get('azure_credentials', 'azure_tenant_id')
 client_id = config.get('azure_credentials', 'azure_client_id')
 client_secret = config.get('azure_credentials', 'azure_client_secret')
+
+# Grab the Azure SQL Server Credentials.
+server_username = config.get('server_info', 'administrator_login')
+server_password = config.get('server_info', 'administrator_login_password')
 
 # Initialize the client.
 azure_pipeline_client = AzureSQLClient(
     client_id=client_id,
     client_secret=client_secret,
     subscription_id=subscription_id,
-    tenant_id=tenant_id
+    tenant_id=tenant_id,
+    username=server_username,
+    password=server_password
 )
 ```
 

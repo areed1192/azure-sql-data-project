@@ -1,0 +1,19 @@
+{
+  "cnbc": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date"
+    },
+    "id": "id",
+    "source": "cnbc",
+    "removes":[
+        "item"
+    ]
+  }
+}

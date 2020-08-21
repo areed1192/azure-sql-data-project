@@ -1,3 +1,5 @@
+import textwrap
+
 from pprint import pprint
 from configparser import ConfigParser
 
@@ -29,6 +31,9 @@ azure_pipeline_client = AzureSQLClient(
     password=server_password
 )
 
+# Grab the News Client.
+finnews_client = azure_pipeline_client.news_client
+
 # Set the Server Name.
 azure_pipeline_client.server_name = 'trading-robot'
 
@@ -44,7 +49,7 @@ server = azure_pipeline_client.get_server()
 # I can also grab it like this, if I didn't set the properties.
 server = azure_pipeline_client.get_server(
     resource_group='resource_group_test',
-    server_name='trading-robot'
+    server_name='trading-robot.database.windows.net'
 )
 
 # Grab the database.
@@ -84,3 +89,25 @@ result = cursor.execute("SELECT @@version;").fetchone()
 while result:
     print("Result: {res}".format(res=result[0]))
     result = cursor.fetchone()
+
+# Define the Query to Create a table.
+create_table = """
+-- If the table doesn't exist, then create.
+IF Object_ID('news_articles_cnbc') IS NULL
+
+CREATE TABLE [stock-financials].[dbo].[news_articles_cnbc] (
+    news_id NVARCHAR(60) NOT NULL,
+    news_source NVARCHAR(60) NOT NULL,
+    link NVARCHAR(MAX) NULL,
+    guid NVARCHAR(MAX) NULL,
+    type NVARCHAR(MAX) NULL,
+    article_id NVARCHAR(MAX) NULL,
+    sponsored NVARCHAR(MAX) NULL,
+    title NVARCHAR(MAX) NULL,
+    description NVARCHAR(MAX) NULL,
+    publication_date NVARCHAR(MAX) NULL
+);
+"""
+
+# Create the table.
+create_result = cursor.execute(create_table)
