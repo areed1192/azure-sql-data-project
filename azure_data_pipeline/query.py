@@ -4,6 +4,8 @@ import json
 import pyodbc
 import textwrap
 
+from collections import namedtuple
+from collections import OrderedDict
 from typing import List
 from typing import Dict
 from typing import Union
@@ -42,7 +44,7 @@ class QueryBuilder():
 
         return str_representation
 
-    def grab_column_names(self, table_name: str) -> str:
+    def grab_column_names(self, fields_names: List[str]) -> str:
         """Returns the column names from a table in Insert Format.
 
         Arguments:
@@ -54,18 +56,18 @@ class QueryBuilder():
         str: The column names from the table organized for an Insert query.
         """
 
-        # Grab the table Column Names.
-        column_names = """
-        SELECT [COLUMN_NAME]
-        FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = N'{tbl_name}'
-        """.format(tbl_name=table_name)
+        # # Grab the table Column Names.
+        # column_names = """
+        # SELECT [COLUMN_NAME]
+        # FROM INFORMATION_SCHEMA.COLUMNS
+        # WHERE TABLE_NAME = N'{tbl_name}'
+        # """.format(tbl_name=table_name)
 
         # Create the Column Names.
         column_names = ','.join(
             [
-                '[{name}]'.format(name=item[0])
-                for item in self.azure_cursor.execute(column_names)
+                '[{name}]'.format(name=item)
+                for item in fields_names
             ]
         )
 
@@ -90,6 +92,8 @@ class QueryBuilder():
                 row[row_key] = row[row_key].replace(',', '')
                 row[row_key] = row[row_key].replace('"', "")
                 row[row_key] = row[row_key].replace("'", "")
+                row[row_key] = row[row_key].replace("\n", " ")
+                row[row_key] = row[row_key].strip()
 
         return row
 
@@ -110,6 +114,28 @@ class QueryBuilder():
         # Remove Unecessary Keys.
         for key_to_remove in self.fields[source]['removes']:
             row.pop(key_to_remove)
+
+        return row
+
+    def add_missing_keys(self, source: str, row: dict) -> Dict:
+        """Adds the missing keys and values if they don't exist.
+
+        Arguments:
+        ----
+        source (str): The News Client source of the articles.
+
+        row (dict): A row representing a single News article, as a dictionary.
+
+        Returns:
+        ----
+        Dict: A dictionary with the missing keys added.
+        """
+
+        # Check to see if we have missing keys.
+        for key_to_add in self.fields[source]['add']:
+
+            if key_to_add not in row:
+                row[key_to_add] = ""
 
         return row
 
@@ -170,13 +196,31 @@ class QueryBuilder():
                 row=article
             )
 
-            # Define the Source Specific Elements.
-            default_elem = [article[source_id], source_name]
+            # Add missing keys.
+            article = self.add_missing_keys(
+                source=source,
+                row=article
+            )
 
-            # Define the row.
-            new_row = default_elem + list(article.values())
+            # Add the default elements.
+            article['news_id'] = article[source_id]
+            article['news_source'] = source_name
 
-            records.append(tuple(new_row))
+            # Clean the Keys.
+            cleaned_article = OrderedDict(
+                (self.fields[source_name]['query'].get(key, key), article[key]) for key in sorted(article.keys())
+            )
+
+            # Define the name tuple.
+            AzureRecord = namedtuple(
+                typename='news_record',
+                field_names=cleaned_article.keys()
+            )
+
+            # record_dict = OrderedDict(sorted(cleaned_article.items()))
+            record_tuple = AzureRecord(**cleaned_article)
+
+            records.append(record_tuple)
 
         return records
 
@@ -200,7 +244,9 @@ class QueryBuilder():
         records = self.build_recordset(data=content, source=source)
 
         # Define the Column Names.
-        column_names = self.grab_column_names(table_name=table_name)
+        column_names = self.grab_column_names(
+            fields_names=records[0]._fields
+        )
 
         # Define the place holders.
         placeholders = self.build_placeholders(row=records[0])

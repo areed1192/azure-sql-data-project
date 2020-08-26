@@ -351,7 +351,7 @@ class AzureSQLClient():
         # Create the connection String.
         connection_string = textwrap.dedent('''
             Driver={driver};
-            Server=tcp:{server};
+            Server={server};
             Database={database};
             Uid={username};
             Pwd={password};

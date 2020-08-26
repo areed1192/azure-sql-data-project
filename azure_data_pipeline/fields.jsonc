@@ -8,12 +8,181 @@
       "sponsored": "sponsored",
       "title": "title",
       "description": "description",
-      "pubDate": "publication_date"
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type"
     },
+    "add": [],
     "id": "id",
     "source": "cnbc",
-    "removes":[
-        "item"
-    ]
+    "removes": ["item"]
+  },
+  "cnn": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type"
+    },
+    "add": [],
+    "id": "guid",
+    "source": "cnn",
+    "removes": ["item"]
+  },
+  "yahoo_finance": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type"
+    },
+    "add": [],
+    "id": "guid",
+    "source": "yahoo_finance",
+    "removes": ["item"]
+  },
+  "seeking_alpha": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type"
+    },
+    "add": [],
+    "id": "guid",
+    "source": "seeking_alpha",
+    "removes": ["item"]
+  },
+  "sp_global": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type"
+    },
+    "add": ["category"],
+    "id": "guid",
+    "source": "sp_global",
+    "removes": ["item"]
+  },
+  "wsj": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type"
+    },
+    "add": [],
+    "id": "guid",
+    "source": "wsj",
+    "removes": ["item"]
+  },
+  "market_watch": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type"
+    },
+    "add": [],
+    "id": "guid",
+    "source": "market_watch",
+    "removes": ["item"]
+  },
+  "nasdaq": {
+    "query": {
+      "link": "link",
+      "guid": "guid",
+      "type": "type",
+      "id": "article_id",
+      "sponsored": "sponsored",
+      "title": "title",
+      "description": "description",
+      "pubDate": "publication_date",
+      "source": "source",
+      "content": "content",
+      "text": "text",
+      "credit": "credit",
+      "origLink": "origin_link",
+      "category": "category",
+      "articleType": "article_type",
+      "partnerlink": "partner_link",
+      "tickers": "tickers"
+    },
+    "add": ["tickers", "partnerlink"],
+    "id": "guid",
+    "source": "nasdaq",
+    "removes": ["item"]
   }
 }

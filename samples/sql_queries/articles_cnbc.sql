@@ -1,11 +1,35 @@
+INSERT INTO [dbo].[news_articles_cnbc]
 
-INSERT INTO [dbo].[trading_data_frame]
     (
-    [news_id],[news_source],[link],[guid],[type],[article_id],[sponsored],[title],[description],[publication_date]
+    [news_id], [news_source], [link], [guid], [type], [article_id], [sponsored], [title], [description], [publication_date]
     )
+
 VALUES
-    ('106663810', 'cnbc', 'https://www.cnbc.com/2020/08/21/coronavirus-struggling-retailers-rush-to-file-for-bankruptcy-as-fear-of-a-second-wave-lingers.html', '106663810', 'cnbcnewsstory', '106663810', 'false', 'Struggling retailers rush to file for bankruptcy as fears of a second wave of coronavirus linger', 'Another round of retail bankruptcies and liquidations could be coming if a second wave of infections run smack into the holiday shopping season.', 'Fri 21 Aug 2020 12:00:30 GMT'),
-    ('106673338', 'cnbc', 'https://www.cnbc.com/2020/08/21/usps-chief-dejoy-no-intention-to-bring-back-removed-mail-sorting-machines.html', '106673338', 'cnbcnewsstory', '106673338', 'false', "USPS chief Louis Dejoy says there's 'no intention to' bring back removed mail-sorting machines", 'In prepared remarks DeJoy said "a false narrative has developed" that his changes at the post office "are somehow designed to harm the ability of voters to use the mail to vote."', 'Fri 21 Aug 2020 14:57:51 GMT'),
+
+    (
+        '106663810',
+        'cnbc',
+        'https://www.cnbc.com/2020/08/21/coronavirus-struggling-retailers-rush-to-file-for-bankruptcy-as-fear-of-a-second-wave-lingers.html',
+        '106663810',
+        'cnbcnewsstory',
+        '106663810',
+        'false',
+        'Struggling retailers rush to file for bankruptcy as fears of a second wave of coronavirus linger',
+        'Another round of retail bankruptcies and liquidations could be coming if a second wave of infections run smack into the holiday shopping season.',
+        'Fri 21 Aug 2020 12:00:30 GMT'
+    ),
+    (
+        '106673338',
+        'cnbc',
+        'https://www.cnbc.com/2020/08/21/usps-chief-dejoy-no-intention-to-bring-back-removed-mail-sorting-machines.html',
+        '106673338',
+        'cnbcnewsstory',
+        '106673338',
+        'false',
+        "USPS chief Louis Dejoy says there's 'no intention to' bring back removed mail-sorting machines",
+        'In prepared remarks DeJoy said "a false narrative has developed" that his changes at the post office "are somehow designed to harm the ability of voters to use the mail to vote."',
+        'Fri 21 Aug 2020 14:57:51 GMT'
+    ),
     ('106673224', 'cnbc', 'https://www.cnbc.com/2020/08/21/july-home-sales-spike-a-record-24point7percent-as-prices-set-a-new-high.html', '106673224', 'cnbcnewsstory', '106673224', 'false', 'July home sales spike a record 24.7% as prices set a new high', 'Sales of existing homes soared 24.7% in July from June according to the National Association of Realtors. The median price of a home sold in July rose 8.5% annually to $304100.', 'Fri 21 Aug 2020 14:41:33 GMT'),
     ('106673357', 'cnbc', 'https://www.cnbc.com/2020/08/21/amazons-consumer-boss-jeff-wilke-to-step-down-in-2021.html', '106673357', 'cnbcnewsstory', '106673357', 'false', "Jeff Wilke Amazon's consumer boss and a top lieutenant to Bezos will step down in 2021", "Jeff Bezos also made three new additions to his S-team on Friday drawing from Amazon's fulfillment and delivery businesses.", 'Fri 21 Aug 2020 15:05:37 GMT'),
     ('106673127', 'cnbc', 'https://www.cnbc.com/2020/08/21/coronavirus-live-updates.html', '106673127', 'live_story', '106673127', 'false', "Coronavirus live updates: Hong Kong plans mass testing; former FDA chief warns of a 'third act' of the virus", 'The coronavirus has infected more than 22.7 million people around the world as of Friday killing at least 794100 people.', 'Fri 21 Aug 2020 14:10:01 GMT'),
@@ -25,20 +49,12 @@ VALUES
     ('106673008', 'cnbc', 'https://www.cnbc.com/2020/08/21/navalnys-doctors-refuse-to-let-putin-critic-leave-russian-hospital.html', '106673008', 'cnbcnewsstory', '106673008', 'false', "Alexei Navalny's doctors say Putin critic was not poisoned block his medical evacuation to Germany", "Russia's most prominent opposition figure is in a coma after falling ill during a flight to Moscow from Siberia on Thursday.", 'Fri 21 Aug 2020 12:33:11 GMT'),
     ('106672454', 'cnbc', 'https://www.cnbc.com/2020/08/20/nba-blazers-grizzlies-play-in-game-foundation-scheduling-changes.html', '106672454', 'cnbcnewsstory', '106672454', 'false', "The NBA is considering a permanent play-in and other schedule shake-ups after solid ratings for last week's Blazers-Grizzlies game", 'The NBAs first "play-in" game last Saturday afternoon between the Portland Trail Blazers and Memphis Grizzlies attracted more than two million viewers.', 'Thu 20 Aug 2020 23:19:28 GMT'),
     ('106671717', 'cnbc', 'https://www.cnbc.com/2020/08/20/former-trump-advisor-steve-bannon-arrested-on-charges-of-defrauding-donors-in-fundraising-scheme.html', '106671717', 'cnbcnewsstory', '106671717', 'false', 'Former Trump advisor Steve Bannon pleads not guilty in alleged border wall fundraising scheme', 'Former senior White House strategist Steve Bannon and three associates were arrested on charges of defrauding donors in a fundraising scheme for their "We Build the Wall" campaign.', 'Thu 20 Aug 2020 22:57:30 GMT'),
-
     ('106673083', 'cnbc', 'https://www.cnbc.com/2020/08/21/news-publishers-ask-apple-for-the-same-app-store-deal-it-gave-amazon.html', '106673083', 'cnbcnewsstory', '106673083', 'false', 'News publishers ask Apple for the same App Store deal it offered Amazon', 'A growing list of companies are railing against Apple for allegedly anti-competitive rules in its App Store the most recent being Fortnite maker Epic Games.', 'Fri 21 Aug 2020 10:45:24 GMT'),
-
     ('106672558', 'cnbc', 'https://www.cnbc.com/2020/08/21/iron-ore-prices-hit-multi-year-highs-on-china-infrastructure-investment.html', '106672558', 'cnbcnewsstory', '106672558', 'false', 'Iron ore prices have hit multi-year highs as demand soars on infrastructure investment', "Government stimulus for infrastructure building in China has sent iron ore prices to multi-year highs this week boosted by strong demand from the world's second largest economy even amid a global pandemic.", 'Fri 21 Aug 2020 03:04:59 GMT'),
-
     ('106673179', 'cnbc', 'https://www.cnbc.com/2020/08/21/coffee-sugar-and-cocoa-prices-are-all-clawing-out-a-recovery-heres-why.html', '106673179', 'cnbcnewsstory', '106673179', 'false', "Coffee sugar and cocoa prices are all clawing out a recovery: Here's why", 'Soft commodities such as coffee sugar and cocoa have broadly rallied over the past few weeks steadying after a period of sharp volatility at the height of the coronavirus crisis.', 'Fri 21 Aug 2020 11:30:51 GMT'),
-
-    ('106670845', 'cnbc', 'https://www.cnbc.com/2020/08/21/where-to-find-international-travel-info-during-the-covid-19-pandemic.html', '106670845', 'cnbcnewsstory', '106670845', 'false',
-        'Want to travel overseas This website shows where youre allowed to go during the pandemic', 'A new website helps travelers plan for trips by collating Covid-19 information related to tourist restrictions entrance requirements lockdown limitations and outbreak details for countries all over the world.', 'Fri 21 Aug 2020 05:59:20 GMT'),
-
+    ('106670845', 'cnbc', 'https://www.cnbc.com/2020/08/21/where-to-find-international-travel-info-during-the-covid-19-pandemic.html', '106670845', 'cnbcnewsstory', '106670845', 'false', 'Want to travel overseas This website shows where youre allowed to go during the pandemic', 'A new website helps travelers plan for trips by collating Covid-19 information related to tourist restrictions entrance requirements lockdown limitations and outbreak details for countries all over the world.', 'Fri 21 Aug 2020 05:59:20 GMT'),
     ('106671824', 'cnbc', 'https://www.cnbc.com/2020/08/21/computer-algorithm-caused-a-grading-crisis-in-british-schools.html', '106671824', 'cnbcnewsstory', '106671824', 'false', 'How a computer algorithm caused a grading crisis in British schools', 'The algorithm has left many students disappointed without a university place and led to widespread protests.', 'Fri 21 Aug 2020 12:45:37 GMT'),
-
     ('106673002', 'cnbc', 'https://www.cnbc.com/2020/08/21/trump-biden-as-stark-as-black-and-white-on-maximum-pressure-on-iran.html', '106673002', 'cnbcnewsstory', '106673002', 'false', "Trump and Biden are 'as stark as black and white' on maximum pressure on Iran analyst says", 'U.S. President Donald Trump wants to put more pressure on Iran while Democratic presidential candidate Joe Biden wants more engagement with the Isalmic Republic said Behnam Ben Taleblu of the Foundation for Defense of Democracies.', 'Fri 21 Aug 2020 11:58:20 GMT'),
-    ('106672547', 'cnbc', 'https://www.cnbc.com/2020/08/21/china-tesla-rival-nio-is-up-240percent-this-year-revamping-plans-to-go-global
-.html', '106672547', 'cnbcnewsstory', '106672547', 'false', 'China Tesla rival Nio is up 240% this year and the company is revamping plans to go global', 'Once on the brink of bankruptcy Chinese electric car company Nio is pressing ahead with plans to expand to Europe and beyond.', 'Fri 21 Aug 2020 12:08:27 GMT'),
+    ('106672547', 'cnbc', 'https://www.cnbc.com/2020/08/21/china-tesla-rival-nio-is-up-240percent-this-year-revamping-plans-to-go-global.html', '106672547', 'cnbcnewsstory', '106672547', 'false', 'China Tesla rival Nio is up 240% this year and the company is revamping plans to go global', 'Once on the brink of bankruptcy Chinese electric car company Nio is pressing ahead with plans to expand to Europe and beyond.', 'Fri 21 Aug 2020 12:08:27 GMT'),
     ('106671606', 'cnbc', 'https://www.cnbc.com/2020/08/20/appeals-court-grants-uber-and-lyft-a-temporary-reprieve-in-case-over-driver-classification.html', '106671606', 'cnbcnewsstory', '106671606', 'false', 'Appeals court grants Uber and Lyft a temporary reprieve following threats to shut down in California', 'Top executives at Uber and Lyft both said last week theyd likely have to suspend service in the state to comply with the injunction.', 'Thu 20 Aug 2020 23:13:45 GMT'),
     ('106672574', 'cnbc', 'https://www.cnbc.com/2020/08/20/top-fda-official-says-he-would-resign-if-agency-rubber-stamps-an-unproven-covid-19-vaccine.html', '106672574', 'wirestory', '106672574', 'false', 'Top FDA official says he would resign if agency rubber-stamps an unproven Covid-19 vaccine', 'A top U.S. health regulator who will help decide the fate of a coronavirus vaccine has vowed to resign if the Trump administration approves a vaccine before it is shown to be safe and effective Reuters has learned.', 'Fri 21 Aug 2020 01:13:53 GMT')

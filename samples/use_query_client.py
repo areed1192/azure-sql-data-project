@@ -59,6 +59,108 @@ query_client.azure_cursor.executemany(
     query_and_records[1]
 )
 
+# Grab the News Client.
+cnn_finance_client = azure_pipeline_client.news_client.cnn_finance
+
+# Grab the news topic.
+content = cnn_finance_client.colleges()
+
+# Build the Insert Query and Recordset.
+query_and_records = query_client.dict_to_query(
+    source='cnn',
+    content=content,
+    table_name='news_articles_cnn'
+)
+
+# Insert the data.
+query_client.azure_cursor.executemany(
+    query_and_records[0],
+    query_and_records[1]
+)
+
+# Grab the News Client.
+market_watch_finance_client = azure_pipeline_client.news_client.market_Watch
+
+# Grab the news topic.
+content = market_watch_finance_client.banking_and_finance()
+
+# Build the Insert Query and Recordset.
+query_and_records = query_client.dict_to_query(
+    source='market_watch',
+    content=content,
+    table_name='news_articles_market_watch'
+)
+
+# Insert the data.
+query_client.azure_cursor.executemany(
+    query_and_records[0],
+    query_and_records[1]
+)
+
+# Grab the News Client.
+seeking_alpha_client = azure_pipeline_client.news_client.seeking_alpha
+
+# Grab the news topic.
+content = seeking_alpha_client.editors_picks()
+
+# Build the Insert Query and Recordset.
+query_and_records = query_client.dict_to_query(
+    source='seeking_alpha',
+    content=content,
+    table_name='news_articles_seeking_alpha'
+)
+
+# Insert the data.
+query_client.azure_cursor.executemany(
+    query_and_records[0],
+    query_and_records[1]
+)
+
+# Grab the News Client.
+sp_global_client = azure_pipeline_client.news_client.sp_global
+
+# Grab the news topic.
+content = sp_global_client.corporate_news()
+
+# Build the Insert Query and Recordset.
+query_and_records = query_client.dict_to_query(
+    source='sp_global',
+    content=content,
+    table_name='news_articles_sp_global'
+)
+
+# Insert the data.
+query_client.azure_cursor.executemany(
+    query_and_records[0],
+    query_and_records[1]
+)
+
+# Grab the News Client.
+nasdaq_client = azure_pipeline_client.news_client.nasdaq
+
+# Grab the news topic.
+content = nasdaq_client.commodities_feed()
+
+# Build the Insert Query and Recordset.
+query_and_records = query_client.dict_to_query(
+    source='nasdaq',
+    content=content,
+    table_name='news_articles_nasdaq'
+)
+
+# Insert the data.
+query_client.azure_cursor.executemany(
+    query_and_records[0],
+    query_and_records[1]
+)
+
+# print(query_and_records[0])
+# pprint(query_and_records[1])
+
+# for record in query_and_records[1]:
+#     print(len(record))
+#     pprint(tuple(record._asdict().values()))
+
 # sql = "INSERT INTO product (item, price) VALUES (?, ?)"
 # params = [('bicycle', 499.99), ('ham', 17.95)]
 # # specify that parameters are for NVARCHAR(50) and DECIMAL(18,4) columns

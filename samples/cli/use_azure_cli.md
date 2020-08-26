@@ -50,7 +50,7 @@ In a terminal or command prompt, sign in to your Azure subscription:
 az login
 ```
 
-The `az` command is the root command of the Azure CLI. What follows `az` is one or more specific commands, such as `login`. See the (`az login`)[https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli] command reference. The Azure CLI normally maintains your sign-in across sessions, but it's a good
+The `az` command is the root command of the Azure CLI. What follows `az` is one or more specific commands, such as `login`. See the ([`az login`](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli) command reference. The Azure CLI normally maintains your sign-in across sessions, but it's a good
 practice to run `az login` whenever you open a new terminal or command prompt.
 
 ### Step 2: Create a Service Principal
