@@ -1,4 +1,4 @@
-# Create a Free Azure Account
+# Create a Azure free account
 
 Link: <https://docs.microsoft.com/en-us/learn/modules/create-an-azure-account/>
 
@@ -29,3 +29,5 @@ any services until you upgrade.
 - The last step is to review the agreement and privacy statement then select **Sign up**.
 
 Congratulations! You have successfully set up a free account, and should be on the Azure portal home page.
+
+Azure Portal: <https://portal.azure.com/>
