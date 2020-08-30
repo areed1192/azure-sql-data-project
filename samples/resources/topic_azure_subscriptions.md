@@ -6,8 +6,8 @@ Link: <https://www.testpreptraining.com/tutorial/microsoft-azure-fundamentals-az
 
 An Azure free subscription includes a \$200 credit to spend on any service for the first 30 days,
 free access to the most popular Azure products for 12 months, and access to more than 25 products
-that are always free. This is an excellent way for new users to get started. To set up a free subscription,
-you need a phone number, a credit card, and a Microsoft account.
+that are always free. This is an excellent way for new users to get started. To set up a free
+subscription, you need a phone number, a credit card, and a Microsoft account.
 
 ## Azure Pay-As-You-Go subscription
 
@@ -41,16 +41,17 @@ subscriptions and services. Authentication for your account is performed using A
 secure applications and services in the cloud.
 
 Users, applications, and other entities registered in Azure AD aren’t all lumped into a single global
-service. Instead, Azure AD is partitioned into separate tenants. A tenant is a dedicated, isolated instance
-of the Azure Active Directory service, owned and managed by an organization. When you sign up for a Microsoft
-cloud service subscription such as Microsoft Azure, Microsoft Intune, or Office 365, a dedicated instance of
-Azure AD is automatically created for your organization.
+service. Instead, Azure AD is partitioned into separate tenants. A tenant is a dedicated, isolated
+instance of the Azure Active Directory service, owned and managed by an organization. When you sign
+up for a Microsoft cloud service subscription such as Microsoft Azure, Microsoft Intune, or Office 365,
+a dedicated instance of Azure AD is automatically created for your organization.
 
-When it comes to Azure AD tenants, there is no concrete definition of “organization” — tenants can be owned
-by individuals, teams, companies, or any other group of people. Tenants are commonly associated with companies.
-If you sign up for Azure with an email address that’s not associated with an existing tenant, the sign-up process
-will walk you through creating a tenant, owned entirely by you.
+When it comes to Azure AD tenants, there is no concrete definition of “organization” — tenants can
+be owned by individuals, teams, companies, or any other group of people. Tenants are commonly associated
+with companies. If you sign up for Azure with an email address that’s not associated with an existing
+tenant, the sign-up process will walk you through creating a tenant, owned entirely by you.
 
-Azure AD tenants and subscriptions have a many-to-one trust relationship: A tenant can be associated with multiple
-Azure subscriptions, but every subscription is associated with only one tenant. This structure allows organizations
-to manage multiple subscriptions and set security rules across all the resources contained within them.
+Azure AD tenants and subscriptions have a many-to-one trust relationship: A tenant can be associated
+with multiple Azure subscriptions, but every subscription is associated with only one tenant. This
+structure allows organizations to manage multiple subscriptions and set security rules across all
+the resources contained within them.

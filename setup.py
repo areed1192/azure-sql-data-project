@@ -15,11 +15,14 @@ setup(
     long_description_content_type="text/markdown",
     url='https://github.com/areed1192/azure-sql-data-project',
     install_requires=[
-        'pyodbc',
-        'azure-mgmt-sql',
-        'azure.identity',
-        'requests',
-        'azure.mgmt.resource'
+        'pyodbc==4.0.30',
+        'fin-news==0.1.1',
+        'azure-core==1.1.1',
+        'azure-common==1.1.25',
+        'azure-cosmos==4.0.0b6'
+        'azure-mgmt-sql==0.20.0',
+        'azure-mgmt-core==1.2.0',
+        'azure-mgmt-compute==13.0.0'
     ],
     packages=find_namespace_packages(
         include=['azure_data_pipeline']
