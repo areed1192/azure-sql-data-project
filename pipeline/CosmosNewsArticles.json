@@ -20,9 +20,19 @@
 						"query": "SELECT * FROM c",
 						"preferredRegions": []
 					},
+					"sink": {
+						"type": "CosmosDbSqlApiSink",
+						"writeBehavior": "insert"
+					},
 					"enableStaging": false
 				},
 				"inputs": [
+					{
+						"referenceName": "CosmosDbSqlApiCollection1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
 					{
 						"referenceName": "CosmosDbSqlApiCollection1",
 						"type": "DatasetReference"
