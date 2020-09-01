@@ -13,12 +13,8 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "Window1"
-				}
-			],
-			"script": "source(output(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'document') ~> CosmosTransform\nCosmosTransform window() ~> Window1"
+			"transformations": [],
+			"script": "source(output(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'document',\n\tsystemColumns: false) ~> CosmosTransform"
 		}
 	}
 }
