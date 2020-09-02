@@ -50,36 +50,6 @@
 				]
 			},
 			{
-				"name": "Organize Articles",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "Query Cosmos News Articles",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "CleanupArticles",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					}
-				}
-			},
-			{
 				"name": "Pull Data From News Function",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
