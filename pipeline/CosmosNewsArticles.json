@@ -102,16 +102,9 @@
 				}
 			},
 			{
-				"name": "Export Back To Cosmos",
+				"name": "Export Back To Cosmos_copy1",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "CleanupArticles",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
