@@ -12,9 +12,17 @@
 					"name": "CosmosTransform"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
-			"script": "source(output(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'document',\n\tsystemColumns: false) ~> CosmosTransform"
+			"sinks": [
+				{
+					"name": "ExportToSql"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SortByArticleID"
+				}
+			],
+			"script": "source(output(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'document',\n\tsystemColumns: false) ~> CosmosTransform\nCosmosTransform sort(asc(source, true),\n\tasc(pubDate, true)) ~> SortByArticleID\nSortByArticleID sink(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ExportToSql"
 		}
 	}
 }
