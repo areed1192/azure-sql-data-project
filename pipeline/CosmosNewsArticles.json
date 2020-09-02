@@ -3,58 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Query Cosmos News Articles",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Pull Data From News Function",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "CosmosDbSqlApiSource",
-						"query": "SELECT * FROM c",
-						"preferredRegions": [],
-						"pageSize": 1,
-						"detectDatetime": true
-					},
-					"sink": {
-						"type": "CosmosDbSqlApiSink",
-						"writeBehavior": "insert",
-						"disableMetricsCollection": false
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "CosmosDbSqlApiCollection1",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "CosmosDbSqlApiCollection1",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Pull Data From News Function",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "7.00:00:00",
+					"timeout": "30",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -62,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "Grab News Function",
+					"functionName": "NewsArticleManual",
 					"method": "GET"
 				},
 				"linkedServiceName": {
