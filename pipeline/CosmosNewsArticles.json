@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy From Cosmos",
+				"name": "Query Cosmos News Articles",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -18,7 +18,9 @@
 					"source": {
 						"type": "CosmosDbSqlApiSource",
 						"query": "SELECT * FROM c",
-						"preferredRegions": []
+						"preferredRegions": [],
+						"pageSize": -2,
+						"detectDatetime": true
 					},
 					"sink": {
 						"type": "CosmosDbSqlApiSink",
@@ -41,9 +43,16 @@
 				]
 			},
 			{
-				"name": "CleanupArticles",
+				"name": "Organize Articles",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Query Cosmos News Articles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -66,7 +75,15 @@
 			{
 				"name": "Azure Function1",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Organize Articles",
+						"dependencyConditions": [
+							"Succeeded",
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
