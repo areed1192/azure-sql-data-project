@@ -5,7 +5,14 @@
 			{
 				"name": "Query Cosmos News Articles",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Pull Data From News Function",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -19,7 +26,7 @@
 						"type": "CosmosDbSqlApiSource",
 						"query": "SELECT * FROM c",
 						"preferredRegions": [],
-						"pageSize": -2,
+						"pageSize": 1,
 						"detectDatetime": true
 					},
 					"sink": {
@@ -49,7 +56,7 @@
 					{
 						"activity": "Query Cosmos News Articles",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -73,17 +80,9 @@
 				}
 			},
 			{
-				"name": "Azure Function1",
+				"name": "Pull Data From News Function",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [
-					{
-						"activity": "Organize Articles",
-						"dependencyConditions": [
-							"Succeeded",
-							"Completed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -91,7 +90,15 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "Grab News Function",
+					"method": "GET"
+				},
+				"linkedServiceName": {
+					"referenceName": "NewsFunction",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
