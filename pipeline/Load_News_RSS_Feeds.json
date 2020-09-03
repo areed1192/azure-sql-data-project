@@ -1,8 +1,0 @@
-{
-	"name": "Load_News_RSS_Feeds",
-	"properties": {
-		"description": "Loads the data from the News RSS feeds.",
-		"concurrency": 1,
-		"annotations": []
-	}
-}
