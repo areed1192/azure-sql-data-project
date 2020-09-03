@@ -15,6 +15,8 @@ setup(
     long_description_content_type="text/markdown",
     url='https://github.com/areed1192/azure-sql-data-project',
     install_requires=[
+        'msrest==0.6.18',
+        'msrestazure==0.6.4',
         'pyodbc==4.0.30',
         'fin-news==0.1.1',
         'azure-core==1.1.1',

@@ -14,7 +14,7 @@ from typing import Any
 
 class QueryBuilder():
 
-    def __init__(self, azure_connection: pyodbc.Connection, azure_cursor: pyodbc.Cursor, azure_client: object) -> None:
+    def __init__(self, azure_client: object = None, azure_connection: pyodbc.Connection = None, azure_cursor: pyodbc.Cursor = None) -> None:
         """Initializes the `QueryBuilder` object."""
 
         from azure_data_pipeline.client import AzureSQLClient
@@ -55,13 +55,6 @@ class QueryBuilder():
         ----
         str: The column names from the table organized for an Insert query.
         """
-
-        # # Grab the table Column Names.
-        # column_names = """
-        # SELECT [COLUMN_NAME]
-        # FROM INFORMATION_SCHEMA.COLUMNS
-        # WHERE TABLE_NAME = N'{tbl_name}'
-        # """.format(tbl_name=table_name)
 
         # Create the Column Names.
         column_names = ','.join(
@@ -268,3 +261,14 @@ class QueryBuilder():
         ))
 
         return (insert_query, records)
+
+    def dict_to_cosmos_query(self, source: str, content: List[dict]) -> List[dict]:
+
+        for article in content:
+            article['source'] = source
+            article['article_id'] = article['id']
+            article = self.sanitize_row(row=article)
+
+            # del article['id']
+
+        return content

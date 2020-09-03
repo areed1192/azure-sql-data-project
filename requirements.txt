@@ -1,5 +1,7 @@
 pyodbc==4.0.30
 fin-news==0.1.1
+msrest==0.6.18
+msrestazure==0.6.4
 azure-core==1.1.1
 azure-common==1.1.25
 azure-cosmos==4.0.0b6

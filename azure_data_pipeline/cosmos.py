@@ -6,8 +6,6 @@ from typing import List
 from typing import Dict
 from typing import Union
 
-from finnews.client import News
-
 from azure.cosmos import documents
 from azure.cosmos import cosmos_client
 from azure.cosmos import ContainerProxy
@@ -18,6 +16,7 @@ from azure.cosmos.partition_key import PartitionKey
 from azure.mgmt.resource import SubscriptionClient
 from azure.common.credentials import ServicePrincipalCredentials
 
+from finnews.client import News
 from azure_data_pipeline.query import QueryBuilder
 
 
@@ -42,8 +41,9 @@ class AzureCosmosClient():
 
         self._database_name = None
         self._database_client: DatabaseProxy = None
+
         self._container_name = None
-        self._container_client: ContainerProxy = cosmos_client
+        self._container_client: ContainerProxy = None
 
         # Create the News Client object.
         self._news_client = News()
@@ -63,19 +63,63 @@ class AzureCosmosClient():
 
         return str_representation
 
-    def connect(self) -> None:
+    @property
+    def news_client(self) -> News:
+        """Returns the `NewsClient` object.
+
+        Returns:
+        ----
+        News: A `NewsClient` object.
+        """
+
+        return self._news_client
+
+    @property
+    def query_client(self) -> QueryBuilder:
+        """Returns the `QueryBuilder` client object.
+
+        Returns:
+        ----
+        QueryBuilder: The query builder client.
+        """
+
+        # Initialize the Client.
+        self._query_client = QueryBuilder()
+
+        return self._query_client
+
+    def connect(self) -> cosmos_client.CosmosClient:
+        """Connects to the Cosmos Database.
+
+        Returns:
+        ----
+        cosmos_client.CosmosClient: A cosmos client object.
+        """
 
         client = cosmos_client.CosmosClient(
             url=self.account_uri,
-            credential=self.account_key
+            credential={"masterKey": self.account_key}
         )
 
         return client
 
-    def grab_database(self, database_name: str):
+    def grab_database(self, database_name: str) -> DatabaseProxy:
+        """Used to query the a database using it's name.
 
+        Arguments:
+        ----
+        database_name (str): The database name (ID).
+
+        Returns:
+        ----
+        DatabaseProxy: A database proxy object which can be used to
+            query other items.
+        """
+
+        # Set the name attribute.
         self._database_name = database_name
-        
+
+        # Get the database.
         database = self._cosmos_client.get_database_client(
             database=self._database_name
         )
@@ -84,7 +128,17 @@ class AzureCosmosClient():
 
         return self._database_client
 
-    def grab_container(self, container_id: str):
+    def grab_container(self, container_id: str) -> ContainerProxy:
+        """Used to grab a container from the database.
+
+        Arguments:
+        ----
+        container_id (str): The name of the container (ID).
+
+        Returns:
+        ----
+        ContainerProxy: A container proxy object.
+        """
 
         container = self._database_client.get_container_client(
             container=container_id
@@ -93,3 +147,25 @@ class AzureCosmosClient():
         self._container_client = container
 
         return self._container_client
+
+    def upsert_article(self, article: dict) -> dict:
+        """Used to upsert an article to our database.
+
+        Arguments:
+        ----
+        article (dict): An article resource, in the form of
+            a dictionary.
+
+        Returns:
+        ----
+        dict: A dictionary representing the upserted item.
+        """
+
+        # Add the item.
+        response = self._container_client.upsert_item(
+            body=article
+        )
+
+        # print("Upserted Item's Id is {0}".format(response['id']))
+
+        return response

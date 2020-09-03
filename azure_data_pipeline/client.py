@@ -9,6 +9,8 @@ from typing import Union
 
 from finnews.client import News
 
+from azure.cosmos import cosmos_client
+
 from azure.mgmt.sql import SqlManagementClient
 from azure.mgmt.resource import SubscriptionClient
 from azure.common.credentials import ServicePrincipalCredentials
@@ -16,10 +18,13 @@ from azure.mgmt.sql.models import Database as AzureDatabase
 from azure.mgmt.sql.models import Server as AzureServer
 
 from azure_data_pipeline.query import QueryBuilder
+from azure_data_pipeline.cosmos import AzureCosmosClient
+
 
 class AzureSQLClient():
 
-    def __init__(self, client_id: str, client_secret: str, subscription_id: str, tenant_id: str, username: str, password: str) -> None:
+    def __init__(self, client_id: str, client_secret: str, subscription_id: str, tenant_id: str, username: str, password: str,
+                 cosmos_account_uri: str, cosmos_account_key: str) -> None:
         """Initializes the `AzureSQLClient` object.
 
         Arguments:
@@ -35,6 +40,10 @@ class AzureSQLClient():
         username (str): The username of the Azure SQL Server.
 
         password (str): The password of the Azure SQL Server.
+
+        cosmos_account_uri (str): Your Azure Cosmos Account ID.
+
+        cosmos_account_key (str): Your Azure Cosmos Account Key.
         """
 
         self.connected = False
@@ -67,6 +76,13 @@ class AzureSQLClient():
         # Create the News Client object.
         self._news_client = News()
         self._query_client: QueryBuilder = None
+
+        # Define the client info.
+        self.cosmos_account_uri = cosmos_account_uri
+        self.cosmos_account_key = cosmos_account_key
+
+        # Define the Cosmos Client.
+        self._cosmos_client: AzureCosmosClient = None
 
     def __repr__(self):
         """String representation of our `AzureSQLClient` instance."""
@@ -148,6 +164,26 @@ class AzureSQLClient():
         )
 
         return self._query_client
+
+    @property
+    def cosmos_client(self) -> cosmos_client.CosmosClient:
+        """Returns the Cosmos Client object.
+
+        Returns:
+        ----
+        CosmosClient: A Cosmos Client object.
+        """
+
+        # Grab the Cosmos Client.
+        self._cosmos_client = AzureCosmosClient(
+            account_uri=self.cosmos_account_uri,
+            account_key=self.cosmos_account_key
+        )
+
+        # Connect tot the CLient.
+        self._cosmos_client.connect()
+
+        return self._cosmos_client
 
     @property
     def credentials(self) -> ServicePrincipalCredentials:

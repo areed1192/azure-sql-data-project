@@ -2,7 +2,6 @@ import textwrap
 
 from pprint import pprint
 from configparser import ConfigParser
-
 from azure_data_pipeline.client import AzureSQLClient
 
 # Initialize the Parser.
@@ -21,6 +20,10 @@ client_secret = config.get('azure_credentials', 'azure_client_secret')
 server_username = config.get('server_info', 'administrator_login')
 server_password = config.get('server_info', 'administrator_login_password')
 
+# Grab the Cosmos Credentials.
+account_uri = config.get('azure_cosmos', 'account_host')
+account_key = config.get('azure_cosmos', 'account_key')
+
 # Initialize the client.
 azure_pipeline_client = AzureSQLClient(
     client_id=client_id,
@@ -28,7 +31,9 @@ azure_pipeline_client = AzureSQLClient(
     subscription_id=subscription_id,
     tenant_id=tenant_id,
     username=server_username,
-    password=server_password
+    password=server_password,
+    cosmos_account_uri=account_uri,
+    cosmos_account_key=account_key
 )
 
 # Connect to the database.
