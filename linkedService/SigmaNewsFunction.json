@@ -1,0 +1,19 @@
+{
+	"name": "SigmaNewsFunction",
+	"properties": {
+		"description": "Represents the News Function Manual Azure function which is used to pull data from different News Sources and load them into a Cosmos Database.",
+		"annotations": [],
+		"type": "AzureFunction",
+		"typeProperties": {
+			"functionAppUrl": "https://sigma-function-news.azurewebsites.net",
+			"functionKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "SigmaKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sigma-azure-news-function-key"
+			}
+		}
+	}
+}
