@@ -19,9 +19,6 @@
 				"guid": {
 					"type": "string"
 				},
-				"item": {
-					"type": "string"
-				},
 				"link": {
 					"type": "string"
 				},
