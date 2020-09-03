@@ -1,6 +1,7 @@
 {
-	"name": "CleanupArticles",
+	"name": "Cosmos_News_Articles_Data_Flow",
 	"properties": {
+		"description": "Represents the data flow, that takes the raw data and does the necessary transformations to clean up the data.",
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
