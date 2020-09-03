@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "CleanupArticles",
+						"referenceName": "Cosmos_News_Articles_Data_Flow",
 						"type": "DataFlowReference"
 					},
 					"compute": {
