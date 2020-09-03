@@ -1,6 +1,7 @@
 {
-	"name": "CosmosNewsArticles",
+	"name": "Cosmos_News_Articles_Pipeline",
 	"properties": {
+		"description": "Represents the Azure Data Factory Pipeline that is used to load the data and clean it up.",
 		"activities": [
 			{
 				"name": "Step 1 - Run Azure New Function",
