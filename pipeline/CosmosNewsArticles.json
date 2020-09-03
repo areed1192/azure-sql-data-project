@@ -3,11 +3,12 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Pull Data From News Function",
+				"name": "Step 1 - Run Azure New Function",
+				"description": "Runs the Sigma Coding Azure News Function to grab the latest news articles.",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "0.00:00:30",
+					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -19,64 +20,17 @@
 					"method": "GET"
 				},
 				"linkedServiceName": {
-					"referenceName": "NewsFunction",
+					"referenceName": "SigmaNewsFunction",
 					"type": "LinkedServiceReference"
 				}
 			},
 			{
-				"name": "Load Data from Cosmos",
-				"description": "Loads the newly loaded data from Cosmos.",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Pull Data From News Function",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "CosmosDbSqlApiSource",
-						"query": "SELECT * FROM C",
-						"preferredRegions": [],
-						"pageSize": 1000,
-						"detectDatetime": true
-					},
-					"sink": {
-						"type": "CosmosDbSqlApiSink",
-						"writeBehavior": "upsert",
-						"disableMetricsCollection": false
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "CosmosDbSqlApiCollection1",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "CosmosDbSqlApiCollection1",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "CleanupArticles",
+				"name": "Step 2 - Clean Up News Articles",
+				"description": "Modifies the News Articles to remove empty fields and ensure they have proper data types.",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Load Data from Cosmos",
+						"activity": "Step 1 - Run Azure New Function",
 						"dependencyConditions": [
 							"Succeeded"
 						]

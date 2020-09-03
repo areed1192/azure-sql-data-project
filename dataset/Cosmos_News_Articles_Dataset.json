@@ -1,8 +1,9 @@
 {
-	"name": "CosmosDbSqlApiCollection1",
+	"name": "Cosmos_News_Articles_Dataset",
 	"properties": {
+		"description": "Represents the News Articles from the Cosmos Database.",
 		"linkedServiceName": {
-			"referenceName": "NewsArticleCosmosDatabase",
+			"referenceName": "SigmaCosmosDatabaseNewsArticles",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
