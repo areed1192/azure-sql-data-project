@@ -1,0 +1,11 @@
+{
+	"name": "SigmaKeyVault",
+	"properties": {
+		"description": "Represents the Key Vault I have on Microsoft Azure.",
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://sigma-key-vault.vault.azure.net/"
+		}
+	}
+}
