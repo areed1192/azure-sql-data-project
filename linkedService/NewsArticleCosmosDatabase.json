@@ -10,7 +10,7 @@
 					"referenceName": "AzureSigmaKeyValut",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "cosmos-connection"
+				"secretName": "cosmos-primary-connection-string"
 			}
 		}
 	},
