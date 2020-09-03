@@ -11,7 +11,7 @@
 					"referenceName": "SigmaKeyVault",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "cosmos-primary-connection-string"
+				"secretName": "cosmos-primary-connection-string-with-database"
 			}
 		}
 	},
