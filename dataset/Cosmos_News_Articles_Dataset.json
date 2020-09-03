@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Represents the News Articles from the Cosmos Database.",
 		"linkedServiceName": {
-			"referenceName": "SigmaCosmosDatabaseNewsArticles",
+			"referenceName": "SigmaCosmosDatabase",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
