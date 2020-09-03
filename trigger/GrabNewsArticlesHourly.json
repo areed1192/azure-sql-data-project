@@ -1,7 +1,7 @@
 {
-	"name": "Grab News Articles Hourly",
+	"name": "GrabNewsArticlesHourly",
 	"properties": {
-		"description": "Runs the News Article Function on an Hourly Basis.",
+		"description": "Serves as the trigger to run the News Article Function on an Hourly Basis.",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [],
