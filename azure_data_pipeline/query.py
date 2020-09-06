@@ -272,3 +272,8 @@ class QueryBuilder():
             # del article['id']
 
         return content
+
+    def save_to_json(self, file_path: str, content: Union[List[Dict], Dict]) -> str:
+
+        with open(file=file_path, mode='w+') as json_file:
+            json.dump(obj=content, fp=json_file, indent=2)

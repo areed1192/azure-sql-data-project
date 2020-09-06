@@ -166,6 +166,26 @@ class AzureCosmosClient():
             body=article
         )
 
-        # print("Upserted Item's Id is {0}".format(response['id']))
-
         return response
+
+    def grab_all_items(self, container_id: str) -> List[dict]:
+        """Used to grab all the items from a container.
+
+        Overview:
+        ----
+        If no container ID is speicified then will use the
+        container queried from the `grab_container` method.
+
+        Arguments:
+        ----
+        container_id (str): The name of the container (ID).
+
+        Returns:
+        ----
+        (List[Dict]):  A collection of documents.
+        """
+
+        # Add the item.
+        documents = self._container_client.read_all_items()
+
+        return documents

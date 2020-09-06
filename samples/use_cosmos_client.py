@@ -1,3 +1,4 @@
+import json
 from pprint import pprint
 from configparser import ConfigParser
 from azure_data_pipeline.client import AzureSQLClient
@@ -60,4 +61,14 @@ for record in records:
 
     pprint(response)
 
+# Grab the articles, this returns a paged item.
+articles = pipeline_cosmos_client.grab_all_items(
+    container_id="FinanceNewsContainer"
+)
 
+# Convert it to a list.
+articles = [item for item in articles]
+
+# Save to a file.
+with open(file='samples/data_dumps/articles.jsonc', mode='w+') as json_file:
+    json.dump(obj=articles, fp=json_file, indent=2)
