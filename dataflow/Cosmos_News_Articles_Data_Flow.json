@@ -7,10 +7,17 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Cosmos_News_Articles_Dataset",
+						"referenceName": "Cosmos_News_Articles_Blob_Storage_JSON",
 						"type": "DatasetReference"
 					},
 					"name": "CosmosTransform"
+				},
+				{
+					"dataset": {
+						"referenceName": "Cosmos_News_Articles_Blob_Storage_JSON",
+						"type": "DatasetReference"
+					},
+					"name": "CosmosBlobFile"
 				}
 			],
 			"sinks": [
@@ -38,7 +45,7 @@
 					"name": "UpsertRowCondition"
 				}
 			],
-			"script": "source(output(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tformat: 'document',\n\tsystemColumns: true) ~> CosmosTransform\nRemoveColumns sort(asc(source, true),\n\tasc(pubDate, true)) ~> SortByArticleID\nCosmosTransform derive(sponsored = upper(sponsored)) ~> SetSponsoredBoolean\nSetSponsoredBoolean select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveColumns\nSortByArticleID alterRow(upsertIf(equals(id, id))) ~> UpsertRowCondition\nUpsertRowCondition sink(input(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tformat: 'document',\n\tpartitionKey: ['/article_id'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1) ~> ArticlesCleaned"
+			"script": "source(output(\n\t\titem as string,\n\t\tlink as string,\n\t\tguid as string,\n\t\ttype as string,\n\t\tid as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\tdescription as string,\n\t\tpubDate as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\thasComments: true,\n\tbackslashEscape: true) ~> CosmosTransform\nsource(output(\n\t\titem as string,\n\t\tlink as string,\n\t\tguid as string,\n\t\ttype as string,\n\t\tid as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\tdescription as string,\n\t\tpubDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tfileList: true) ~> CosmosBlobFile\nRemoveColumns sort(asc(pubDate, true)) ~> SortByArticleID\nCosmosTransform derive(sponsored = upper(sponsored)) ~> SetSponsoredBoolean\nSetSponsoredBoolean select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveColumns\nSortByArticleID alterRow(upsertIf(equals(id,id))) ~> UpsertRowCondition\nUpsertRowCondition sink(input(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tformat: 'document',\n\tpartitionKey: ['/article_id'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1) ~> ArticlesCleaned"
 		}
 	}
 }
