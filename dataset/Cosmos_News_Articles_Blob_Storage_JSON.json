@@ -1,0 +1,52 @@
+{
+	"name": "Cosmos_News_Articles_Blob_Storage_JSON",
+	"properties": {
+		"description": "Represents a connection to a news article JSON file.",
+		"linkedServiceName": {
+			"referenceName": "SigmaBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "cnbc_blog_news.jsonc",
+				"folderPath": "News Articles",
+				"container": "finance-news-articles"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"item": {
+					"type": "string"
+				},
+				"link": {
+					"type": "string"
+				},
+				"guid": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				},
+				"sponsored": {
+					"type": "string"
+				},
+				"title": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"pubDate": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
