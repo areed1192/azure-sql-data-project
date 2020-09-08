@@ -25,9 +25,12 @@
 			"transformations": [
 				{
 					"name": "RemoveItemColumn"
+				},
+				{
+					"name": "ChangeColumnTypes"
 				}
 			],
-			"script": "source(output(\n\t\titem as string,\n\t\tlink as string,\n\t\tguid as string,\n\t\ttype as string,\n\t\tid as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\tdescription as string,\n\t\tpubDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> GrabFromBlobStorage\nGrabFromBlobStorage select(mapColumn(\n\t\titem,\n\t\tlink,\n\t\tguid,\n\t\ttype,\n\t\tid,\n\t\tsponsored,\n\t\ttitle,\n\t\tdescription,\n\t\tpublication_date = pubDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveItemColumn\nRemoveItemColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> WriteToCleanedJsonFile"
+			"script": "source(output(\n\t\titem as string,\n\t\tlink as string,\n\t\tguid as string,\n\t\ttype as string,\n\t\tid as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\tdescription as string,\n\t\tpubDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> GrabFromBlobStorage\nGrabFromBlobStorage select(mapColumn(\n\t\tlink,\n\t\tguid,\n\t\ttype,\n\t\tid,\n\t\tsponsored,\n\t\ttitle,\n\t\tdescription,\n\t\tpublication_date = pubDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveItemColumn\nRemoveItemColumn derive(news_publisher = toString('CNBC'),\n\t\tsponsored = toBoolean(sponsored),\n\t\tpublication_date = toDate(publication_date)) ~> ChangeColumnTypes\nChangeColumnTypes sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> WriteToCleanedJsonFile"
 		}
 	}
 }
