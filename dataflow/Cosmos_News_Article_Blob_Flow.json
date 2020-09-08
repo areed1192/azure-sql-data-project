@@ -1,0 +1,29 @@
+{
+	"name": "Cosmos_News_Article_Blob_Flow",
+	"properties": {
+		"description": "Wrangles data coming from our Azure Blob Storage.\n",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Cosmos_News_Articles_Blob_Storage_JSON",
+						"type": "DatasetReference"
+					},
+					"name": "GrabFromBlobStorage"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Cleaned_JSON_Articles",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"script": "source(output(\n\t\titem as string,\n\t\tlink as string,\n\t\tguid as string,\n\t\ttype as string,\n\t\tid as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\tdescription as string,\n\t\tpubDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> GrabFromBlobStorage\nGrabFromBlobStorage sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}
