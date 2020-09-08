@@ -11,7 +11,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "cnbc_blog_news.jsonc",
+				"fileName": "cnbc_blog_news",
 				"folderPath": "News Articles",
 				"container": "finance-news-articles"
 			}
