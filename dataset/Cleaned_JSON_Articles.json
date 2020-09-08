@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "CNBC_Cleaned.json",
 				"folderPath": "Cleaned Articles",
 				"container": "finance-news-articles"
 			}
