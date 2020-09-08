@@ -1,5 +1,5 @@
 {
-	"name": "Cosmos_News_Article_Blob_Flow",
+	"name": "Cosmos_News_Articles_Blob_Flow",
 	"properties": {
 		"description": "Wrangles data coming from our Azure Blob Storage.\n",
 		"type": "MappingDataFlow",
