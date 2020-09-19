@@ -1,0 +1,31 @@
+{
+	"name": "Cosmos_News_Articles_Pipeline_Function",
+	"properties": {
+		"description": "Represents the Azure Data Factory Pipeline that only runs the Azure Function and doesn't do any cleaning.",
+		"activities": [
+			{
+				"name": "Step 1 - Run Azure New Function",
+				"description": "Runs the Sigma Coding Azure News Function to grab the latest news articles.",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "NewsArticleManual?upload_to=cosmos",
+					"method": "GET"
+				},
+				"linkedServiceName": {
+					"referenceName": "SigmaNewsFunction",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
