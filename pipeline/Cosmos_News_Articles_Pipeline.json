@@ -17,7 +17,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "NewsArticleManual",
+					"functionName": "NewsArticleManual?upload_to=blob",
 					"method": "GET"
 				},
 				"linkedServiceName": {

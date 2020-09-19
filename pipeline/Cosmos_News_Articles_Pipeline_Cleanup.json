@@ -1,7 +1,7 @@
 {
-	"name": "Cosmos_News_Articles_Pipeline_Simple",
+	"name": "Cosmos_News_Articles_Pipeline_Cleanup",
 	"properties": {
-		"description": "A more simplified version of the Azure Cosmos Pipeline.",
+		"description": "A more simplified version of the Azure Cosmos Pipeline, that only runs the cleaning portion of the pipeline.",
 		"activities": [
 			{
 				"name": "Cosmos_News_Article_Blob_Flow",
