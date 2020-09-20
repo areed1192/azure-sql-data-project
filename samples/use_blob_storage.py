@@ -1,4 +1,6 @@
+import json
 from pprint import pprint
+
 from azure.identity import DefaultAzureCredential
 
 from azure.storage.blob import BlobClient
@@ -90,3 +92,19 @@ with open(file=dest_file, mode='wb+') as my_blob:
 
     # Write to the file.
     my_blob.write(download_stream.readall())
+
+    content = json.loads(download_stream.readall())
+
+# Load the Data.
+blob_client.upload_blob(
+    data=json.dumps(content),
+    blob_type="BlockBlob",
+    overwrite=True
+)
+
+# Create a new Blob.
+container_client.upload_blob(
+    name="News Articles/blob_data_cleaned",
+    data=json.dumps(content),
+    blob_type="BlockBlob"
+)

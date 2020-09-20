@@ -21,7 +21,8 @@ setup(
         'fin-news==0.1.1',
         'azure-core==1.7.0',
         'azure-common==1.1.25',
-        'azure-cosmos==4.0.0b6'
+        'azure-cosmos==4.0.0b6',
+        'azure-identity==1.4.0',
         'azure-mgmt-sql==0.20.0',
         'azure-mgmt-core==1.2.0',
         'azure-mgmt-compute==13.0.0',
