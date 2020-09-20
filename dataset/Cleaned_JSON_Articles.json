@@ -1,0 +1,18 @@
+{
+	"name": "Cleaned_JSON_Articles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SigmaBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Cleaned Articles",
+				"container": "finance-news-articles"
+			}
+		}
+	}
+}
