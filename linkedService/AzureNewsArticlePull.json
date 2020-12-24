@@ -11,7 +11,7 @@
 					"referenceName": "SigmaKeyVault",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "https://sigma-key-vault.vault.azure.net/secrets/sigma-azure-news-function-key/f7d1807e18fb4235878f9cf84cf2d41e"
+				"secretName": "sigma-azure-news-function-key"
 			}
 		}
 	}
