@@ -1,0 +1,19 @@
+{
+	"name": "AzureKeyVaultTradingFunction",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "AzureFunction",
+		"typeProperties": {
+			"functionAppUrl": "https://sigma-function-news.azurewebsites.net",
+			"functionKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"type": "LinkedServiceReference",
+					"referenceName": "AzureKeyVaultTrading"
+				},
+				"secretName": "sigma-azure-news-function-key"
+			}
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "AzureKeyVaultTrading",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://sigma-key-vault.vault.azure.net/"
+		},
+		"annotations": []
+	}
+}
