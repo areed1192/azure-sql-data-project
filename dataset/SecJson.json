@@ -1,0 +1,18 @@
+{
+	"name": "SecJson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SecServiceSpecific",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "/66740/index.json"
+			}
+		},
+		"schema": {}
+	}
+}
