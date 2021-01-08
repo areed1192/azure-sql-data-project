@@ -1,0 +1,12 @@
+{
+	"name": "SecServiceSpecific",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://www.sec.gov/Archives/edgar/data/66740/index.json",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
