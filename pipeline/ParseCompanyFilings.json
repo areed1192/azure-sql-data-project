@@ -1,0 +1,10 @@
+{
+	"name": "ParseCompanyFilings",
+	"properties": {
+		"description": "Represents a data pipeline that grabs company filings from the SEC on a scheduled basis.",
+		"annotations": [
+			"filings",
+			"trading-systems"
+		]
+	}
+}
