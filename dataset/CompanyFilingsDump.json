@@ -1,15 +1,16 @@
 {
-	"name": "SecJson",
+	"name": "CompanyFilingsDump",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SecServiceSpecific",
+			"referenceName": "SecBlobStorageAccount",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "HttpServerLocation"
+				"type": "AzureBlobStorageLocation",
+				"container": "sec-company-filings"
 			}
 		},
 		"schema": {}
