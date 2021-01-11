@@ -1,0 +1,16 @@
+{
+	"name": "CleanUpFilings",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "GrabFilingsFromBlobStorage"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> GrabFilingsFromBlobStorage"
+		}
+	}
+}
