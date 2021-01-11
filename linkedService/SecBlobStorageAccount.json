@@ -1,0 +1,17 @@
+{
+	"name": "SecBlobStorageAccount",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "SigmaKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "blob-sec-connection-string"
+			}
+		}
+	}
+}
