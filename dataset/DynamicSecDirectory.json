@@ -1,0 +1,17 @@
+{
+	"name": "DynamicSecDirectory",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DynamicSecServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}
