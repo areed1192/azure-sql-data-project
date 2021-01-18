@@ -1,0 +1,13 @@
+{
+	"name": "AzureSecCikTable",
+	"properties": {
+		"description": "Represents a connection the Azure SQL Database containing the SEC CIK table.",
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseTradingRobot",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
