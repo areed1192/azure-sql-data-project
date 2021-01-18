@@ -16,9 +16,12 @@
 			"transformations": [
 				{
 					"name": "Flatten2"
+				},
+				{
+					"name": "Select1"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings foldDown(mapColumn(\n\t\t{_corrupt_record}\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2"
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'documentPerLine') ~> AzureBlobStorageSecFilings\nSelect1 foldDown(mapColumn(\n\t\t{_corrupt_record}\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2\nAzureBlobStorageSecFilings select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
 		}
 	}
 }
