@@ -4,54 +4,6 @@
 		"description": "Represents a data pipeline that grabs company filings from the SEC on a scheduled basis.",
 		"activities": [
 			{
-				"name": "GrabFilings",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
-					"sink": {
-						"type": "JsonSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
-						},
-						"formatSettings": {
-							"type": "JsonWriteSettings"
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "SecJson",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "CompanyFilingsDump",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "LookupCikNumbers",
 				"description": "Returns the CIK numbers from the `ST_Tickers_CIK` table.",
 				"type": "Lookup",
@@ -130,7 +82,7 @@
 									"formatSettings": {
 										"type": "JsonWriteSettings",
 										"filePattern": {
-											"value": "@{item()}",
+											"value": "concat(@{item().CIK},'.jsonc')",
 											"type": "Expression"
 										}
 									}
@@ -143,7 +95,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"cik": {
-											"value": "@item()",
+											"value": "@item().CIK",
 											"type": "Expression"
 										}
 									}
