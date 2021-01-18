@@ -5,12 +5,20 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"name": "GrabFilingsFromBlobStorage"
+					"dataset": {
+						"referenceName": "AzureTradingFactorySecDumps",
+						"type": "DatasetReference"
+					},
+					"name": "AzureBlobStorageSecFilings"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> GrabFilingsFromBlobStorage"
+			"transformations": [
+				{
+					"name": "Flatten2"
+				}
+			],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'singleDocument') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings foldDown(skipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2"
 		}
 	}
 }
