@@ -50,7 +50,8 @@
 					},
 					"activities": [
 						{
-							"name": "Copy data1",
+							"name": "CopyCikFilingDirectory",
+							"description": "Makes a HTTP GET request to grab the specific company's SEC directory which contains all of their filings.",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
