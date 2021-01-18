@@ -10,7 +10,8 @@
 		},
 		"parameters": {
 			"cik": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "1503948"
 			}
 		},
 		"annotations": [],
