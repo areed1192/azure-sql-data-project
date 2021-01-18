@@ -6,6 +6,9 @@
 			"referenceName": "SigmaBlobStorage",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "FinancialArticles"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

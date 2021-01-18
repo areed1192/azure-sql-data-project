@@ -5,6 +5,9 @@
 			"referenceName": "SigmaBlobStorage",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "FinancialArticles"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
@@ -13,6 +16,7 @@
 				"folderPath": "Cleaned Articles",
 				"container": "finance-news-articles"
 			}
-		}
+		},
+		"schema": {}
 	}
 }

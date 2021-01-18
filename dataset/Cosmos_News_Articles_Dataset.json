@@ -6,6 +6,9 @@
 			"referenceName": "SigmaCosmosDatabase",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "FinancialArticles"
+		},
 		"annotations": [],
 		"type": "CosmosDbSqlApiCollection",
 		"schema": {
