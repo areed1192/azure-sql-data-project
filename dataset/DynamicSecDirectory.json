@@ -3,7 +3,10 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "DynamicSecServer",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"SecCikNumber": "@item()"
+			}
 		},
 		"annotations": [],
 		"type": "Json",
