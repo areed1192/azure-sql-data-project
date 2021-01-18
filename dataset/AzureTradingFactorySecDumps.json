@@ -1,0 +1,18 @@
+{
+	"name": "AzureTradingFactorySecDumps",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SecBlobStorageAccount",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "sec-company-filings"
+			}
+		},
+		"schema": {}
+	}
+}

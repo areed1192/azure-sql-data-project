@@ -110,8 +110,51 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"maxConcurrentConnections": 3,
+										"requestMethod": "GET",
+										"requestTimeout": ""
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": {
+											"value": "@{item()}",
+											"type": "Expression"
+										}
+									}
+								},
 								"enableStaging": false
-							}
+							},
+							"inputs": [
+								{
+									"referenceName": "DynamicSecDirectory",
+									"type": "DatasetReference",
+									"parameters": {
+										"cik": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureTradingFactorySecDumps",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}
