@@ -8,11 +8,20 @@
 				"SecCikNumber": "@item()"
 			}
 		},
+		"parameters": {
+			"cik": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "HttpServerLocation"
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@concat(dataset().cik, '/index.json')",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {}
