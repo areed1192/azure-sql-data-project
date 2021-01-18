@@ -18,7 +18,7 @@
 					"name": "Flatten2"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'singleDocument') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings foldDown(skipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2"
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings foldDown(mapColumn(\n\t\t{_corrupt_record}\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2"
 		}
 	}
 }
