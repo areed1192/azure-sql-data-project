@@ -5,6 +5,9 @@
 			"referenceName": "SecBlobStorageAccount",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "SecFilings"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

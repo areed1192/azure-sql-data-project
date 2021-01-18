@@ -6,6 +6,9 @@
 			"referenceName": "AzureSqlDatabaseTradingRobot",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "SecFilings"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": []

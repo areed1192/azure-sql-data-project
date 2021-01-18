@@ -11,6 +11,9 @@
 				"defaultValue": "1503948"
 			}
 		},
+		"folder": {
+			"name": "SecFilings"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
