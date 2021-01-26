@@ -18,10 +18,10 @@
 					"name": "Flatten2"
 				},
 				{
-					"name": "Select1"
+					"name": "RenamedColumns"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'documentPerLine') ~> AzureBlobStorageSecFilings\nSelect1 foldDown(mapColumn(\n\t\t{_corrupt_record}\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2\nAzureBlobStorageSecFilings select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureBlobStorageSecFilings\nRenamedColumns foldDown(mapColumn(\n\t\t{_corrupt_record}\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten2\nAzureBlobStorageSecFilings select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RenamedColumns"
 		}
 	}
 }
