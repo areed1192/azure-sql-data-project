@@ -22,6 +22,7 @@
 					"value": "@dataset().FileName",
 					"type": "Expression"
 				},
+				"folderPath": "data-dumps-aggregated",
 				"container": "sec-company-filings"
 			}
 		},
