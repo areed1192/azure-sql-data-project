@@ -26,7 +26,7 @@
 					"name": "CreateOtherColumns"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings derive(each(match(name=='name'), $$ = toString($$))) ~> ModifyColumns1\nModifyColumns1 select(mapColumn(\n\t\teach(match(name!='last_modified_iso'&&name!='last_modified_timestamp'&&name!='size'))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveLastModifiedColumns\nRemoveLastModifiedColumns derive(each(match(name=='full_path'), $$ = split($$, '/')[0]),\n\t\teach(match(name=='full_path'), $$ = split($$, '.')[1])) ~> CreateOtherColumns"
+			"script": "source(output(\n\t\tfull_path as string,\n\t\tlast_modified as timestamp,\n\t\tlast_modified_iso as string,\n\t\tlast_modified_timestamp as double,\n\t\tname as long,\n\t\tsize as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings derive(each(match(name=='name'), $$ = toString($$)),\n\t\tsize = '$$') ~> ModifyColumns1\nModifyColumns1 select(mapColumn(\n\t\teach(match(name!='last_modified_iso'&&name!='last_modified_timestamp'&&name!='size'))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveLastModifiedColumns\nRemoveLastModifiedColumns derive(each(match(name=='full_path'), $$ = split($$, '/')[0]),\n\t\teach(match(name=='full_path'), $$ = split($$, '.')[1])) ~> CreateOtherColumns"
 		}
 	}
 }
