@@ -30,7 +30,7 @@
 					"name": "DerivedColumn1"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings derive(each(match(name=='name'), $$ = toString($$))) ~> ModifyColumns1\nModifyColumns1 select(mapColumn(\n\t\teach(match(name!='last_modified_iso'&&name!='last_modified_timestamp'&&name!='size'))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveColumns1\nRemoveColumns1 derive(each(match(name=='full_path'), $$ = split($$, '/')[0])) ~> DerivedColumn1\nDerivedColumn1 sink(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1) ~> SqlDump"
+			"script": "source(output(\n\t\tfull_path as string,\n\t\tlast_modified as timestamp,\n\t\tlast_modified_iso as string,\n\t\tlast_modified_timestamp as double,\n\t\tname as long,\n\t\tsize as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureBlobStorageSecFilings\nAzureBlobStorageSecFilings derive(each(match(name=='name'), $$ = toString($$))) ~> ModifyColumns1\nModifyColumns1 select(mapColumn(\n\t\teach(match(name!='last_modified_iso'&&name!='last_modified_timestamp'&&name!='size'))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveColumns1\nRemoveColumns1 derive(each(match(name=='full_path'), $$ = split($$, '/')[0])) ~> DerivedColumn1\nDerivedColumn1 sink(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1) ~> SqlDump"
 		}
 	}
 }
