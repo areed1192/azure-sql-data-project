@@ -1,0 +1,61 @@
+{
+	"name": "AzureSecCompanyFilingsTable",
+	"properties": {
+		"description": "Represents a connection the DT_Filings_Company table in the SEC Database.",
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseTradingRobot",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SecFilings"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Filing_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "CIK",
+				"type": "varchar"
+			},
+			{
+				"name": "Accession_Number",
+				"type": "varchar"
+			},
+			{
+				"name": "Full_Path",
+				"type": "varchar"
+			},
+			{
+				"name": "Last_Modified",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "File_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "File_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "Date_Pulled",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Pulled",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DT_Filings_Company"
+		}
+	}
+}
