@@ -117,7 +117,7 @@
 							"type": "ExecuteDataFlow",
 							"dependsOn": [
 								{
-									"activity": "CopyCikFilingDirectory",
+									"activity": "RunAzureFunctionCleanUp",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -146,6 +146,35 @@
 									"computeType": "General"
 								},
 								"traceLevel": "Fine"
+							}
+						},
+						{
+							"name": "RunAzureFunctionCleanUp",
+							"description": "Runs the TradingSystemSecParserTrigger function which cleans up the dumped JSON files.",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [
+								{
+									"activity": "CopyCikFilingDirectory",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "TradingSystemSecParserTrigger",
+								"method": "GET"
+							},
+							"linkedServiceName": {
+								"referenceName": "TradingSystemAzureFunctions",
+								"type": "LinkedServiceReference"
 							}
 						}
 					]
