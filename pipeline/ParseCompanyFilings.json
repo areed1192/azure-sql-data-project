@@ -117,7 +117,7 @@
 							"type": "ExecuteDataFlow",
 							"dependsOn": [
 								{
-									"activity": "RunAzureFunctionCleanUp",
+									"activity": "RunCleanUp",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -149,7 +149,7 @@
 							}
 						},
 						{
-							"name": "RunAzureFunctionCleanUp",
+							"name": "RunCleanUp",
 							"description": "Runs the TradingSystemSecParserTrigger function which cleans up the dumped JSON files.",
 							"type": "AzureFunctionActivity",
 							"dependsOn": [
@@ -170,6 +170,34 @@
 							"userProperties": [],
 							"typeProperties": {
 								"functionName": "TradingSystemSecParserTrigger",
+								"method": "GET"
+							},
+							"linkedServiceName": {
+								"referenceName": "TradingSystemAzureFunctions",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "RunDelete",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [
+								{
+									"activity": "CleanUpFilings",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "TradingSystemSecParserTrigger?to_delete=True",
 								"method": "GET"
 							},
 							"linkedServiceName": {
