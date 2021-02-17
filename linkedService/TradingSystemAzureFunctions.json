@@ -1,0 +1,19 @@
+{
+	"name": "TradingSystemAzureFunctions",
+	"properties": {
+		"description": "A collection of Azure Functions that are used to clean up filings and prep for insert into a database.",
+		"annotations": [],
+		"type": "AzureFunction",
+		"typeProperties": {
+			"functionAppUrl": "https://trading-system-sec-parser.azurewebsites.net",
+			"functionKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultTrading",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "trading-system-sec-parser-function-key"
+			}
+		}
+	}
+}
