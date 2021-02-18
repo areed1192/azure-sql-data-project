@@ -19,7 +19,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT TOP(10) \n    [CIK]\nFROM [dbo].[ST_Tickers_CIK]",
+						"sqlReaderQuery": "SELECT TOP(1) \n    [CIK]\nFROM [dbo].[ST_Tickers_CIK]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -134,7 +134,12 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "CleanUpFilings",
-									"type": "DataFlowReference"
+									"type": "DataFlowReference",
+									"datasetParameters": {
+										"AzureBlobStorageSecFilings": {
+											"FileName": "@concat(item().CIK,'.jsonc')"
+										}
+									}
 								},
 								"compute": {
 									"coreCount": 8,
@@ -195,7 +200,10 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"functionName": "TradingSystemSecParserTrigger?to_delete=True",
+								"functionName": {
+									"value": "@concat('TradingSystemSecParserTrigger?to_delete=True&cik_number=',item().CIK)",
+									"type": "Expression"
+								},
 								"method": "GET"
 							},
 							"linkedServiceName": {
