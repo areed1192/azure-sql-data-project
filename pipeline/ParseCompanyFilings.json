@@ -134,12 +134,7 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "CleanUpFilings",
-									"type": "DataFlowReference",
-									"datasetParameters": {
-										"AzureBlobStorageSecFilings": {
-											"FileName": "@concat(item().CIK,'.jsonc')"
-										}
-									}
+									"type": "DataFlowReference"
 								},
 								"compute": {
 									"coreCount": 8,
