@@ -1,0 +1,31 @@
+{
+	"name": "AzureTradingFactorySecDumpsAggregated",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SecBlobStorageAccount",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "SecFilings"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": "data-dumps-aggregated",
+				"container": "sec-company-filings"
+			}
+		},
+		"schema": {}
+	}
+}

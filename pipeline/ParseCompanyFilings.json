@@ -169,7 +169,10 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"functionName": "TradingSystemSecParserTrigger",
+								"functionName": {
+									"value": "@concat('TradingSystemSecParserTrigger?cik_number=',item().CIK)",
+									"type": "Expression"
+								},
 								"method": "GET"
 							},
 							"linkedServiceName": {
