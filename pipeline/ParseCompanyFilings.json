@@ -210,6 +210,42 @@
 								"referenceName": "TradingSystemAzureFunctions",
 								"type": "LinkedServiceReference"
 							}
+						},
+						{
+							"name": "UpdateCikPullDate",
+							"description": "Updates the `Date_Pulled` column in the CIK table to make sure we don't keep pulling the same filings.",
+							"type": "Lookup",
+							"dependsOn": [
+								{
+									"activity": "RunDelete",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "UPDATE [dbo].[ST_Tickers_CIK] \nSET Date_Pulled = GETDATE()\n       WHERE CIK = @{item().CIK};\n\nSELECT * FROM [dbo].[ST_Tickers_CIK]  WHERE CIK = @{item().CIK};\n\n\n",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "AzureSecCikTable",
+									"type": "DatasetReference"
+								}
+							}
 						}
 					]
 				}
