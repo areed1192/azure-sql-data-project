@@ -215,6 +215,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "SecFilings"
+		},
 		"annotations": [
 			"filings",
 			"trading-systems"
