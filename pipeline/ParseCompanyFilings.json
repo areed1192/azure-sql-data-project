@@ -19,7 +19,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT TOP(1) \n    [CIK]\nFROM [dbo].[ST_Tickers_CIK]",
+						"sqlReaderQuery": "SELECT TOP(5) \n    *\nFROM [dbo].[ST_Tickers_CIK]\nWHERE [Date_Pulled] < DATEADD(day,-10, GETDATE())",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
