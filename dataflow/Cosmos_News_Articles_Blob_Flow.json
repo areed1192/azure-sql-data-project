@@ -2,6 +2,9 @@
 	"name": "Cosmos_News_Articles_Blob_Flow",
 	"properties": {
 		"description": "Wrangles data coming from our Azure Blob Storage.\n",
+		"folder": {
+			"name": "FinancialArticles"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
@@ -40,7 +43,7 @@
 					"name": "MakeSureIDFieldExist"
 				}
 			],
-			"script": "source(output(\n\t\titem as string,\n\t\tlink as string,\n\t\tguid as string,\n\t\ttype as string,\n\t\tid as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\tdescription as string,\n\t\tpubDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> GrabFromBlobStorage\nGrabFromBlobStorage select(mapColumn(\n\t\tlink,\n\t\tguid,\n\t\ttype,\n\t\tid,\n\t\tsponsored,\n\t\ttitle,\n\t\tdescription,\n\t\tpublication_date = pubDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveItemColumn\nRemoveItemColumn derive(news_publisher = toString('CNBC'),\n\t\tsponsored = toBoolean(sponsored),\n\t\tpublication_date = toTimestamp(publication_date, 'EEE, d MMM yyyy HH:mm:ss', 'GMT')) ~> ChangeColumnTypes\nChangeColumnTypes alterRow(upsertIf(not(isNull(id)))) ~> MakeSureIDFieldExist\nChangeColumnTypes sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> WriteToCleanedJsonFile\nMakeSureIDFieldExist sink(input(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tformat: 'document',\n\tpartitionKey: ['/id'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> WriteToCosmosDatabase"
+			"script": "source(output(\n\t\titem as string,\n\t\tlink as string,\n\t\tguid as string,\n\t\ttype as string,\n\t\tid as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\tdescription as string,\n\t\tpubDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'documentPerLine') ~> GrabFromBlobStorage\nGrabFromBlobStorage select(mapColumn(\n\t\tlink,\n\t\tguid,\n\t\ttype,\n\t\tid,\n\t\tsponsored,\n\t\ttitle,\n\t\tdescription,\n\t\tpublication_date = pubDate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveItemColumn\nRemoveItemColumn derive(news_publisher = toString('CNBC'),\n\t\tsponsored = toBoolean(sponsored),\n\t\tpublication_date = toTimestamp(publication_date, 'EEE, d MMM yyyy HH:mm:ss', 'GMT')) ~> ChangeColumnTypes\nChangeColumnTypes alterRow(upsertIf(not(isNull(id)))) ~> MakeSureIDFieldExist\nChangeColumnTypes sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> WriteToCleanedJsonFile\nMakeSureIDFieldExist sink(input(\n\t\tarticle_id as string,\n\t\tdescription as string,\n\t\tguid as string,\n\t\titem as string,\n\t\tlink as string,\n\t\tpubDate as string,\n\t\tsource as string,\n\t\tsponsored as string,\n\t\ttitle as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tformat: 'document',\n\tpartitionKey: ['/id'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> WriteToCosmosDatabase"
 		}
 	}
 }

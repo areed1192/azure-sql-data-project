@@ -1,6 +1,9 @@
 {
 	"name": "CleanUpFilings",
 	"properties": {
+		"folder": {
+			"name": "SecFilings"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
