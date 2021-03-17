@@ -1,0 +1,12 @@
+{
+	"name": "IexPriceHistoryService",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://cloud.iexapis.com/stable/stock/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
