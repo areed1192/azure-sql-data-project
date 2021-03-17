@@ -1,0 +1,15 @@
+{
+	"name": "IexPriceHistory",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "IexPriceHistoryService",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SecFilings"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
