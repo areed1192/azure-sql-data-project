@@ -6,6 +6,7 @@
 		"typeProperties": {
 			"baseUrl": "https://sigma-key-vault.vault.azure.net/"
 		},
-		"annotations": []
+		"annotations": [],
+		"description": "Represents a connection to my Azure Key Vault service."
 	}
 }
