@@ -3,8 +3,31 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "GrabHistoricalPrices",
-				"type": "Copy",
+				"name": "GrabApiKey",
+				"description": "Grabs the API Key from my Azure Key Vault.",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://sigma-key-vault.vault.azure.net/secrets/iex-api-key/782a6c7b2be942c29bf9291109685bc6?api-version=7.1",
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "GrabTradingTickers",
+				"description": "Retrieves all the Tickers that we are will be trading.",
+				"type": "Lookup",
 				"dependsOn": [
 					{
 						"activity": "GrabApiKey",
@@ -23,54 +46,96 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET"
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT * FROM [ST_Tickers_Trading];",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
-					"sink": {
-						"type": "RestSink",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": 10,
-						"requestMethod": "POST",
-						"writeBatchSize": 10000,
-						"httpCompressionType": "none"
+					"dataset": {
+						"referenceName": "AzureSecCikTable",
+						"type": "DatasetReference"
 					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "IexPriceHistory",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "IexPriceHistory",
-						"type": "DatasetReference"
-					}
-				]
+					"firstRowOnly": false
+				}
 			},
 			{
-				"name": "GrabApiKey",
-				"description": "Grabs the API Key from my Azure Key Vault.",
-				"type": "WebActivity",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": true
-				},
+				"name": "GrabPricesEachTicker",
+				"description": "Grabs the historical prices for each of the tickers we will be trading.",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "GrabTradingTickers",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://sigma-key-vault.vault.azure.net/secrets/iex-api-key/782a6c7b2be942c29bf9291109685bc6",
-					"method": "GET",
-					"authentication": {
-						"type": "MSI",
-						"resource": "https://management.azure.com/"
-					}
+					"items": {
+						"value": "@activity('GrabTradingTickers').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "GrabHistoricalPrices",
+							"description": "Grabs the historical prices for the specific ticker symbol.",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": "arrayOfObjects"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "IexPriceHistory",
+									"type": "DatasetReference",
+									"parameters": {
+										"token": {
+											"value": "@activity('GrabApiKey').output.value",
+											"type": "Expression"
+										},
+										"ticker": "@item().ticker"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureTradingFactoryIexDumps",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": {
+											"value": "@concat(item().ticker,'.jsonc')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
