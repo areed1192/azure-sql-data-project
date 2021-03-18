@@ -5,6 +5,11 @@
 			"referenceName": "IexPriceHistoryService",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"token": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "SecFilings"
 		},
