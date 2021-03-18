@@ -1,0 +1,24 @@
+{
+	"name": "CleanUpPrices",
+	"properties": {
+		"description": "Cleans up the prices related to the IEX API.",
+		"folder": {
+			"name": "SecFilings"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureTradingFactoryIexDumps",
+						"type": "DatasetReference"
+					},
+					"name": "AzureIexPrices"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureIexPrices"
+		}
+	}
+}
