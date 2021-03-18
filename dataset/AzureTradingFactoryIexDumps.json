@@ -26,6 +26,88 @@
 				"container": "iex-price-history"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"close": {
+					"type": "number"
+				},
+				"high": {
+					"type": "number"
+				},
+				"low": {
+					"type": "number"
+				},
+				"open": {
+					"type": "number"
+				},
+				"symbol": {
+					"type": "string"
+				},
+				"volume": {
+					"type": "integer"
+				},
+				"id": {
+					"type": "string"
+				},
+				"key": {
+					"type": "string"
+				},
+				"subkey": {
+					"type": "string"
+				},
+				"date": {
+					"type": "string"
+				},
+				"updated": {
+					"type": "integer"
+				},
+				"changeOverTime": {
+					"type": "number"
+				},
+				"marketChangeOverTime": {
+					"type": "number"
+				},
+				"uOpen": {
+					"type": "number"
+				},
+				"uClose": {
+					"type": "number"
+				},
+				"uHigh": {
+					"type": "number"
+				},
+				"uLow": {
+					"type": "number"
+				},
+				"uVolume": {
+					"type": "integer"
+				},
+				"fOpen": {
+					"type": "number"
+				},
+				"fClose": {
+					"type": "number"
+				},
+				"fHigh": {
+					"type": "number"
+				},
+				"fLow": {
+					"type": "number"
+				},
+				"fVolume": {
+					"type": "integer"
+				},
+				"label": {
+					"type": "string"
+				},
+				"change": {
+					"type": "number"
+				},
+				"changePercent": {
+					"type": "number"
+				}
+			}
+		}
 	}
 }
