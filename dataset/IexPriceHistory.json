@@ -8,6 +8,10 @@
 		"parameters": {
 			"token": {
 				"type": "string"
+			},
+			"ticker": {
+				"type": "string",
+				"defaultValue": "msft"
 			}
 		},
 		"folder": {
@@ -17,7 +21,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('twtr/chart/ytd?token=',dataset().token)",
+				"value": "@concat(toLower(dataset().ticker), '/chart/ytd?token=', dataset().token)",
 				"type": "Expression"
 			}
 		},
