@@ -1,4 +1,12 @@
 {
 	"name": "SigmaDataFactory",
+	"properties": {
+		"globalParameters": {
+			"iex_api_key": {
+				"type": "string",
+				"value": "xxxx"
+			}
+		}
+	},
 	"location": "westus"
 }
