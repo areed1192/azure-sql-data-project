@@ -18,7 +18,7 @@
 			],
 			"sinks": [],
 			"transformations": [],
-			"script": "source(output(\n\t\tclose as double,\n\t\thigh as double,\n\t\tlow as double,\n\t\topen as double,\n\t\tsymbol as string,\n\t\tvolume as string,\n\t\tid as string,\n\t\tkey as string,\n\t\tsubkey as string,\n\t\tdate as string,\n\t\tupdated as string,\n\t\tchangeOverTime as double,\n\t\tmarketChangeOverTime as double,\n\t\tuOpen as double,\n\t\tuClose as double,\n\t\tuHigh as double,\n\t\tuLow as double,\n\t\tuVolume as string,\n\t\tfOpen as double,\n\t\tfClose as double,\n\t\tfHigh as double,\n\t\tfLow as double,\n\t\tfVolume as string,\n\t\tlabel as string,\n\t\tchange as double,\n\t\tchangePercent as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureIexPrices"
+			"script": "source(output(\n\t\tclose as double,\n\t\thigh as double,\n\t\tlow as double,\n\t\topen as double,\n\t\tsymbol as string,\n\t\tvolume as string,\n\t\tid as string,\n\t\tkey as string,\n\t\tsubkey as string,\n\t\tdate as string,\n\t\tupdated as string,\n\t\tchangeOverTime as double,\n\t\tmarketChangeOverTime as double,\n\t\tuOpen as double,\n\t\tuClose as double,\n\t\tuHigh as double,\n\t\tuLow as double,\n\t\tuVolume as string,\n\t\tfOpen as double,\n\t\tfClose as double,\n\t\tfHigh as double,\n\t\tfLow as double,\n\t\tfVolume as string,\n\t\tlabel as string,\n\t\tchange as double,\n\t\tchangePercent as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'arrayOfDocuments') ~> AzureIexPrices"
 		}
 	}
 }
