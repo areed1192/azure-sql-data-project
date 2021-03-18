@@ -24,7 +24,8 @@
 				},
 				"folderPath": "iex-price-history",
 				"container": "iex-price-history"
-			}
+			},
+			"encodingName": "US-ASCII"
 		},
 		"schema": {
 			"type": "object",
