@@ -26,7 +26,7 @@ setup(
         'azure-mgmt-sql==0.20.0',
         'azure-mgmt-core==1.2.0',
         'azure-mgmt-compute==13.0.0',
-        'azure-storage-blob==12.4.0',
+        'azure-storage-blob==12.13.0',
         'azure-keyvault-secrets==4.2.0'
     ],
     packages=find_namespace_packages(
